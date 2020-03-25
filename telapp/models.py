@@ -8,7 +8,7 @@ class Person(models.Model):
 
     def __str__(self):
 
-        return self.f_name  + "     " +    format(self.l_name).capitalize()
+        return self.f_name.capitalize()  + "     " +    format(self.l_name).capitalize()
     #def __str__(self):
     #    return self.l_name
 
