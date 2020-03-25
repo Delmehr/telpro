@@ -1,0 +1,36 @@
+
+<<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> {{page_title}} </title>
+    <meta name='description' content="names and tel numbers">
+    <meta name= "viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h2>
+    <a href="http://127.0.0.1:8000/admin">The admin!</a>
+    <a href="http://127.0.0.1:8000/admin/telapp/person/">Add Names</a>
+    <a href="http://127.0.0.1:8000/admin/telapp/telnum/">Add Numbers</a>
+</h2>
+<h2>this is fine, we all have the names as follows:
+number of people:{{person_list|length}}
+</h2>
+
+{% for person in person_list %}
+
+   {{person.id}} - {{person}} <br/>
+
+
+      {% for tel in tel_list %}
+
+          {% if person.id == tel.person_id %}
+
+            T :     {{tel}}<br/>
+                 {% endif %}
+   {% endfor %}
+
+ {% endfor %}
+
+  </body>
+</html>

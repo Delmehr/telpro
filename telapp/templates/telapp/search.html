@@ -1,0 +1,10 @@
+<h1>This is to search</h1>
+<form method="GET" action="{% url 'blog:search' %}">
+
+  <input name="q" value="{{request.GET.q}}" placeholder="search...">
+  <button class="btn btn-success" type="submit">
+          Search
+
+  </button>
+
+</form>
