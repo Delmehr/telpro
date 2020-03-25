@@ -11,7 +11,7 @@ class Person(models.Model):
         return self.f_name.capitalize()  + "     " +    format(self.l_name).capitalize()
     #def __str__(self):
     #    return self.l_name
-
+#that capitalize is a test!
 
 
 
