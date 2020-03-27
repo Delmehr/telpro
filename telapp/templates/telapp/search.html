@@ -8,3 +8,65 @@
   </button>
 
 </form>
+
+<!DOCTYPE html>
+
+<h2 style="color:magenta ">The list of People and their Telephone numbers</h2>
+<form  action="/search/" method="post">
+  {% csrf_token %}
+  <input type="text" name="srh" placeholder="Enter Name, first or second">
+
+  <div>
+
+    <label class="col-lg-2">
+
+      <button type="submit" class="btn btn-danger"> Search</button>
+
+    </label>
+{% if messages %}
+{% for k in messages %}
+<br>
+
+<h2 style="color:green">-----------------</h2>
+
+<h2 style="color:red">-----------------</h2>
+
+
+<li style="color: red" > {{k | capfirst }}
+</li>
+{% endfor %}
+{% endif %}
+{% for k in sr %}
+<table>
+  <tr>
+    <td>First Name:</td>
+    <td>{{k.f_name | capfirst}}</td>
+    </tr>
+    <tr>
+    <td>Last Name:</td>
+    <td>{{k.l_name | capfirst}}</td>
+  </tr>
+</table>
+
+
+<h4 style="color:magenta">Tel No. is/are:</h4>
+
+
+{% for t in tl %}
+     {% if t.person_id == k.id %}
+<br> {{t}}
+{% else %}
+{{null}}
+{% endif %}
+
+{% endfor %}
+
+
+
+
+
+{% endfor %}
+
+  </div>
+
+</form>

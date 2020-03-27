@@ -35,17 +35,25 @@ def list(request):
 
     return render(request, "telapp/testindex.html", context)
 
+
+
+
 def search(request):
 
-    template = 'telapp/search.html'
 
-    query = request.GET.get('q')
+    if request.method=='POST':
+        srch = request.POST['srh']
+        if srch:
+            match = Person.objects.filter(Q(f_name__icontains=srch) |
+                                          Q(l_name__icontains=srch))
+            all_tels = Tel.objects.all()
 
-    results = Person.objects.filter(Q(f_name__icontains=query) | Q(l_name__icontains=query))
+            if match:
+                return render(request, 'telapp/search.html', {'sr':match, 'tl':all_tels})
+            else:
+                messages.error(request,  'no result found!')
 
-    context = {
-              'items': results,
+        else:
+            return HttpResponseRedirect('/search/')
 
-    }
-
-    return render(request, template, context)
+    return render(request, 'telapp/search.html')
