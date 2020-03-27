@@ -17,7 +17,7 @@
 number of people:{{person_list|length}}
 </h2>
 
-{% for person in person_list %}
+{% for person in persons %}
 
    {{person.id}} - {{person}} <br/>
 
@@ -32,5 +32,23 @@ number of people:{{person_list|length}}
 
  {% endfor %}
 
+ this is the paginator
+ <div class="pagination">
+   <span class="step-links">
+       {% if persons.has_previous %}
+           <a href="?page=1">&laquo; first</a>
+           <a href="?page={{ persons.previous_page_number }}">previous</a>
+       {% endif %}
+
+       <span class="current">
+           Page {{ persons.number }} of {{ persons.paginator.num_pages }}.
+       </span>
+
+       {% if persons.has_next %}
+           <a href="?page={{ persons.next_page_number }}">next</a>
+           <a href="?page={{ persons.paginator.num_pages }}">last &raquo;</a>
+       {% endif %}
+   </span>
+ </div>
   </body>
 </html>
