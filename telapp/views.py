@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.db.models import Q
-#from django.http import HttpResponse
+from django.http import HttpResponse
 # Create your views here.
 
 from telapp.models import Person, Telnum
@@ -46,7 +46,7 @@ def search(request):
         if srch:
             match = Person.objects.filter(Q(f_name__icontains=srch) |
                                           Q(l_name__icontains=srch))
-            all_tels = Tel.objects.all()
+            all_tels = Telnum.objects.all()
 
             if match:
                 return render(request, 'telapp/search.html', {'sr':match, 'tl':all_tels})
