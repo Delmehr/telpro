@@ -50,11 +50,35 @@
 {% endif %}
 
 {% endfor %}
+{% endfor %}
+
+{% for p in sp %}
+
+{{p}}
+<table>
+  <tr>
+    <td>First Name:</td>
+    {{p.person_id}}
+    <td>{{k.f_name | capfirst}}</td>
+    </tr>
+    <tr>
+    <td>Last Name:</td>
+    <td>{{k.l_name | capfirst}}</td>
+  </tr>
+</table>
 
 
+<h4 style="color:magenta">Tel No. is/are:</h4>
 
 
+{% for person in sr %}
+     {% if p.person_id == person.id %}
+<br> {{person.f_name}}
+{% else %}
+{{null}}
+{% endif %}
 
+{% endfor %}
 {% endfor %}
 
   </div>

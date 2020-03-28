@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
+from itertools import chain
 # Create your views here.
 
 from telapp.models import Person, Telnum
@@ -10,7 +11,7 @@ from telapp.models import Person, Telnum
 def index(request):
     all_persons = Person.objects.all()
     all_telnum = Telnum.objects.all()
-    paginator = Paginator(all_persons, 2)
+    paginator = Paginator(all_persons, 10)
     page = request.GET.get('page')
     persons = paginator.get_page(page)
     context = {
@@ -40,17 +41,19 @@ def list(request):
 
 
 def search(request):
-
-
     if request.method=='POST':
         srch = request.POST['srh']
         if srch:
             match = Person.objects.filter(Q(f_name__icontains=srch) |
-                                          Q(l_name__icontains=srch))
+                                         (Q(l_name__icontains=srch)))
+            catch = Telnum.objects.filter(Q(tel_num__icontains=srch))                              
+                                           
             all_tels = Telnum.objects.all()
 
-            if match:
-                return render(request, 'telapp/search.html', {'sr':match, 'tl':all_tels})
+            if match or catch:
+                return render(request, 'telapp/search.html', {'sr':match, 'tl':all_tels,
+                                                              'sp':catch})
+                                                               
             else:
                 messages.error(request,  'no result found!')
 
