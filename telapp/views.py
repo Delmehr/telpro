@@ -39,21 +39,21 @@ def list(request):
 
 
 
-
 def search(request):
     if request.method=='POST':
         srch = request.POST['srh']
         if srch:
             match = Person.objects.filter(Q(f_name__icontains=srch) |
                                          (Q(l_name__icontains=srch)))
-            catch = Telnum.objects.filter(Q(tel_num__icontains=srch))                              
-                                           
+            catch = Telnum.objects.filter(Q(tel_num__icontains=srch))
+
             all_tels = Telnum.objects.all()
+            all_persons= Person.objects.all()
 
             if match or catch:
-                return render(request, 'telapp/search.html', {'sr':match, 'tl':all_tels,
+                return render(request, 'telapp/search.html', {'sr':match, 'tl':all_tels, "pers":all_persons,
                                                               'sp':catch})
-                                                               
+
             else:
                 messages.error(request,  'no result found!')
 

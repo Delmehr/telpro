@@ -1,7 +1,16 @@
 
 <!DOCTYPE html>
+<br>
+<h2>
+<a href="http://127.0.0.1:8000/admin">The admin!</a>
+<a href="http://127.0.0.1:8000/admin/telapp/person/">Add Names</a>
+<a href="http://127.0.0.1:8000/admin/telapp/telnum/">Add Numbers</a>
 
-<h2 style="color:magenta ">The list of People and their Telephone numbers</h2>
+
+</h2>
+
+
+<h2 style="color:magenta "> Search Name or Tel. no.</h2>
 <form  action="/search/" method="post">
   {% csrf_token %}
   <input type="text" name="srh" placeholder="Enter Name, first or second">
@@ -15,22 +24,18 @@
     </label>
 {% if messages %}
 {% for k in messages %}
-<br>
-
-<h2 style="color:green">-----------------</h2>
-
-<h2 style="color:red">-----------------</h2>
 
 
-<li style="color: red" > {{k | capfirst }}
-</li>
+ <h4 style="color: red" > {{k | capfirst }} </h4>
+
 {% endfor %}
 {% endif %}
+
 {% for k in sr %}
 <table>
   <tr>
     <td>First Name:</td>
-    <td>{{k.f_name | capfirst}}</td>
+    <td>{{k.f_name | upper}}</td>
     </tr>
     <tr>
     <td>Last Name:</td>
@@ -39,7 +44,10 @@
 </table>
 
 
-<h4 style="color:magenta">Tel No. is/are:</h4>
+
+<style="color:magenta"Tel No. is/are:>
+
+</style>
 
 
 {% for t in tl %}
@@ -51,36 +59,29 @@
 
 {% endfor %}
 {% endfor %}
+<br>
+------------------------------
 
-{% for p in sp %}
+{% for tel in sp %}
 
-{{p}}
-<table>
-  <tr>
-    <td>First Name:</td>
-    {{p.person_id}}
-    <td>{{k.f_name | capfirst}}</td>
-    </tr>
-    <tr>
-    <td>Last Name:</td>
-    <td>{{k.l_name | capfirst}}</td>
-  </tr>
-</table>
+ {% for person in pers %}
+  {% if tel.person_id == person.id %}
+  <br>
+  {{person.f_name | upper}}, {{person.l_name | capfirst}}--{{tel}}
 
+<br>
 
-<h4 style="color:magenta">Tel No. is/are:</h4>
-
-
-{% for person in sr %}
-     {% if p.person_id == person.id %}
-<br> {{person.f_name}}
 {% else %}
 {{null}}
 {% endif %}
 
-{% endfor %}
-{% endfor %}
+  {% endfor %}
 
-  </div>
 
-</form>
+
+  {% endfor %}
+
+
+
+
+------------------------------

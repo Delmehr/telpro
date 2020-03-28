@@ -21,3 +21,23 @@
 
 </form>
 
+
+
+
+/////////////////////////////////////////////////
+
+
+    {% if tel.person_id == k.id %}
+{{k}}
+{% endif %}
+
+{% endfor %}
+{% for person in sr %}
+     {% if person.person_id == person.id %}
+{{f_name}}
+{% else %}
+{{null}}
+{% endif %}
+
+{% endfor %}
+{% endfor %}
