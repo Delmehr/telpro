@@ -1,5 +1,5 @@
 
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -12,17 +12,17 @@
     <a href="http://127.0.0.1:8000/admin">The admin!</a>
     <a href="http://127.0.0.1:8000/admin/telapp/person/">Add Names</a>
     <a href="http://127.0.0.1:8000/admin/telapp/telnum/">Add Numbers</a>
-    <a href="http://127.0.0.1:8000/search/">Search Names!</a>
+    <a href="{% url 'telapp:search_all' %}">Search Names!</a>
 
 </h2>
-<h2>this is fine, we all have the names as follows:
-number of people:{{person_list|length}}
+<h2>Contacts:   ({{persons|length}} people in your list)
 </h2>
 
 {% for person in persons %}
 
-   {{person.id}} - {{person}} <br/>
+   {{person.id}} - {{person |upper}} <br/>
 
+  Available telephone number(s):<br>
 
       {% for tel in tel_list %}
 
