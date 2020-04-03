@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 class Person(models.Model):
@@ -22,3 +23,12 @@ class Telnum(models.Model):
 
     def __str__(self):
         return self.tel_num
+
+class TelForm(ModelForm):
+    class Meta:
+        model = Telnum
+        fields = '__all__'
+class ContactForm(ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'

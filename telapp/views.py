@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from itertools import chain
 # Create your views here.
 
-from telapp.models import Person, Telnum
+from telapp.models import Person, Telnum, ContactForm, TelForm
 
 def index(request):
     all_persons = Person.objects.all()
@@ -61,3 +61,39 @@ def search(request):
             return HttpResponseRedirect('/search/')
 
     return render(request, 'telapp/search.html')
+
+def add_person(request):
+    if request.method == 'POST':
+        nameform = ContactForm(request.POST)
+        if nameform.is_valid(): #and telform.is_valid():
+            nameform.save()
+            #telform.save()
+            return redirect(add_person)
+
+    else:
+        nameform = ContactForm
+        #telform = TelForm
+
+
+
+    context = {
+    'nameform':nameform,
+    #'telform': telform,
+    }
+    return render(request, 'telapp/add_person.html', context)
+
+    if request.method =='POST':
+
+        telform  = TelForm(request.POST)
+        if telform.is_valid():
+            telform.save()
+            return redirect(add_person)
+
+    else:
+        telform = TelForm
+
+    pontext ={
+    'telform': telform,
+    }
+
+    return render(request, 'telapp/add_person.html', pontext)
