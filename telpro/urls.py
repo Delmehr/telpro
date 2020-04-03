@@ -20,5 +20,6 @@ urlpatterns = [
     path('', include('telapp.urls')),
     path('admin/', admin.site.urls, name='admin'),
     path('search/', include('telapp.urls')),
+    path('add/', include('telapp.urls')),
 
 ]
